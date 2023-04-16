@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/main.ts"],
+  "sourcesContent": ["import express from 'express';\nimport { startSpyShops } from './shopify';\n\nconst host = process.env.HOST ?? 'localhost';\nconst port = process.env.PORT ? Number(process.env.PORT) : 3333;\n\nconst app = express();\n\napp.listen(port, host, () => {\n  console.log(`[ ready ] http://${host}:${port}`);\n});\n\nstartSpyShops();\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;AAAA,qBAAoB;AACpB,qBAA8B;AAE9B,MAAM,OAAO,QAAQ,IAAI,QAAQ;AACjC,MAAM,OAAO,QAAQ,IAAI,OAAO,OAAO,QAAQ,IAAI,IAAI,IAAI;AAE3D,MAAM,UAAM,eAAAA,SAAQ;AAEpB,IAAI,OAAO,MAAM,MAAM,MAAM;AAC3B,UAAQ,IAAI,oBAAoB,QAAQ,MAAM;AAChD,CAAC;AAAA,IAED,8BAAc;",
+  "names": ["express"]
+}

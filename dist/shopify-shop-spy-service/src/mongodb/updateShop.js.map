@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/mongodb/updateShop.ts"],
+  "sourcesContent": ["import { ShopModel } from '@src/types/shop-model';\nimport { WithId } from 'mongodb';\nimport { getShopsCollection } from './collections';\n\nexport async function updateShop(shop: WithId<ShopModel>) {\n  try {\n    const shopsCollection = getShopsCollection();\n\n    await shopsCollection.updateOne({ _id: shop._id }, { $set: shop });\n  } catch (error) {\n    console.error(error.message);\n  }\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAEA,yBAAmC;AAEnC,eAAsB,WAAW,MAAyB;AACxD,MAAI;AACF,UAAM,sBAAkB,uCAAmB;AAE3C,UAAM,gBAAgB,UAAU,EAAE,KAAK,KAAK,IAAI,GAAG,EAAE,MAAM,KAAK,CAAC;AAAA,EACnE,SAAS,OAAP;AACA,YAAQ,MAAM,MAAM,OAAO;AAAA,EAC7B;AACF;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/shopify/getShopProducts.ts"],
+  "sourcesContent": ["import { ShopifyProduct } from '@src/types/index';\nimport axios from 'axios';\n\n// LIMIT BY PAGE FOR SHOPIFY API\nconst LIMIT_BY_PAGE = 250;\n\nexport const getShopProducts = async (url: string) => {\n  const products: ShopifyProduct[] = [];\n\n  let limitReached = false;\n  let page = 1;\n\n  while (!limitReached) {\n    const response = await axios.get(\n      `${url}/products.json?page=${page}&limit=${LIMIT_BY_PAGE}`\n    );\n    const _products: ShopifyProduct[] = response.data.products;\n\n    products.push(..._products);\n    page++;\n    if (_products.length < LIMIT_BY_PAGE) limitReached = true;\n  }\n  return products;\n};\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AACA,mBAAkB;AAGlB,MAAM,gBAAgB;AAEf,MAAM,kBAAkB,OAAO,QAAgB;AACpD,QAAM,WAA6B,CAAC;AAEpC,MAAI,eAAe;AACnB,MAAI,OAAO;AAEX,SAAO,CAAC,cAAc;AACpB,UAAM,WAAW,MAAM,aAAAA,QAAM;AAAA,MAC3B,GAAG,0BAA0B,cAAc;AAAA,IAC7C;AACA,UAAM,YAA8B,SAAS,KAAK;AAElD,aAAS,KAAK,GAAG,SAAS;AAC1B;AACA,QAAI,UAAU,SAAS;AAAe,qBAAe;AAAA,EACvD;AACA,SAAO;AACT;",
+  "names": ["axios"]
+}

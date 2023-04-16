@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/types/shop-model.ts"],
+  "sourcesContent": ["import { ShopProductModel } from './shop-product-model';\n\nexport interface ShopModel {\n  url: string;\n  name: string;\n  logo: string;\n  about: string;\n  currency: string;\n  subscribersCount: number;\n  products: ShopProductModel[];\n}\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

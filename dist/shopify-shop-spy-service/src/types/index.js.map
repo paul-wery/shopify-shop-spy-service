@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/types/index.ts"],
+  "sourcesContent": ["export * from './shopifyProduct';\n"],
+  "mappings": ";;;;;;;;;;;;;;AAAA;AAAA;AAAA,0BAAc,6BAAd;",
+  "names": []
+}

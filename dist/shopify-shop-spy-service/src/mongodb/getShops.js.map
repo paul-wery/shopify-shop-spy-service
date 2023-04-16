@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/mongodb/getShops.ts"],
+  "sourcesContent": ["import { getShopsCollection } from './collections';\n\nexport async function getShops() {\n  try {\n    const shopsCollection = getShopsCollection();\n\n    return shopsCollection.find({ subscribersCount: { $gt: 0 } }).toArray();\n  } catch (error) {\n    console.error(error.message);\n  }\n  return [];\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,yBAAmC;AAEnC,eAAsB,WAAW;AAC/B,MAAI;AACF,UAAM,sBAAkB,uCAAmB;AAE3C,WAAO,gBAAgB,KAAK,EAAE,kBAAkB,EAAE,KAAK,EAAE,EAAE,CAAC,EAAE,QAAQ;AAAA,EACxE,SAAS,OAAP;AACA,YAAQ,MAAM,MAAM,OAAO;AAAA,EAC7B;AACA,SAAO,CAAC;AACV;",
+  "names": []
+}

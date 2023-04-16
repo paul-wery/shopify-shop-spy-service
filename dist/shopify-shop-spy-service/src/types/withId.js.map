@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/types/withId.ts"],
+  "sourcesContent": ["import { ShopProductModel } from './shop-product-model';\n\nexport type WithId<T> = T & {\n  id: string;\n};\n\nexport type WithIdAndProducts<T> = T & {\n  id: string;\n  products: WithId<ShopProductModel>[];\n};\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

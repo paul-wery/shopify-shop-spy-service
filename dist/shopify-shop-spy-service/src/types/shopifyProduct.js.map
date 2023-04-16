@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/types/shopifyProduct.ts"],
+  "sourcesContent": ["type ShopifyProductSalesData = {\n  salesCount: number;\n  lastInventoryQuantity: number;\n  lastUpdatedAt: string;\n};\n\ntype ShopifyProductOptions = {\n  name: string;\n  position: number;\n  values: string[];\n};\n\ntype ShopifyProductVariant = {\n  id: number;\n  title: string;\n  option1: string;\n  option2: null;\n  option3: null;\n  sku: string;\n  requires_shipping: boolean;\n  taxable: boolean;\n  featured_image: null;\n  available: boolean;\n  price: string;\n  grams: number;\n  compare_at_price: string;\n  position: number;\n  product_id: number;\n  created_at: string;\n  updated_at: string;\n};\n\nexport type ShopifyProduct = {\n  id: number;\n  title: string;\n  handle: string;\n  body_html: string;\n  published_at: string;\n  created_at: string;\n  updated_at: string;\n  vendor: string;\n  product_type: string;\n  tags: string[];\n  images: { src: string }[];\n  variants: ShopifyProductVariant[];\n  options: ShopifyProductOptions[];\n  // This property is retrieved in getProductSalesData.ts\n  salesData: ShopifyProductSalesData;\n};\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

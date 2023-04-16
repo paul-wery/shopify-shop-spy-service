@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/mongodb/conf.ts"],
+  "sourcesContent": ["import configuration from '@src/configuration';\nimport { MongoClient, ServerApiVersion } from 'mongodb';\n\nexport const client = new MongoClient(configuration.mongodb.uri, {\n  serverApi: {\n    version: ServerApiVersion.v1,\n    strict: true,\n    deprecationErrors: true,\n  },\n});\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,2BAA0B;AAC1B,qBAA8C;AAEvC,MAAM,SAAS,IAAI,2BAAY,qBAAAA,QAAc,QAAQ,KAAK;AAAA,EAC/D,WAAW;AAAA,IACT,SAAS,gCAAiB;AAAA,IAC1B,QAAQ;AAAA,IACR,mBAAmB;AAAA,EACrB;AACF,CAAC;",
+  "names": ["configuration"]
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/tools/arrayToChunks.ts"],
+  "sourcesContent": ["export function arrayToChunks<T>(array: T[], chunkSize: number) {\n  const chunks: T[][] = [];\n\n  for (let index = 0; index < array.length; index += chunkSize) {\n    const chunk = array.slice(index, index + chunkSize);\n\n    chunks.push(chunk);\n  }\n  return chunks;\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,SAAS,cAAiB,OAAY,WAAmB;AAC9D,QAAM,SAAgB,CAAC;AAEvB,WAAS,QAAQ,GAAG,QAAQ,MAAM,QAAQ,SAAS,WAAW;AAC5D,UAAM,QAAQ,MAAM,MAAM,OAAO,QAAQ,SAAS;AAElD,WAAO,KAAK,KAAK;AAAA,EACnB;AACA,SAAO;AACT;",
+  "names": []
+}
