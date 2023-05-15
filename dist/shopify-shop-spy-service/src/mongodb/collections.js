@@ -27,6 +27,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var collections_exports = {};
 __export(collections_exports, {
+  getShopProductSalesCollection: () => getShopProductSalesCollection,
   getShopProductsCollection: () => getShopProductsCollection,
   getShopsCollection: () => getShopsCollection
 });
@@ -37,13 +38,15 @@ var import_conf = require("@src/mongodb/conf");
 function getShopsCollection() {
   return import_conf.client.db(import_configuration.default.mongodb.db).collection(import_mongodb_collections.SHOPS_COLLECTION);
 }
-function getShopProductsCollection(shopId) {
-  return import_conf.client.db(import_configuration.default.mongodb.db).collection(
-    `${import_mongodb_collections.SHOPS_COLLECTION}/${shopId}/${import_mongodb_collections.SHOP_PRODUCTS_COLLECTION}`
-  );
+function getShopProductsCollection() {
+  return import_conf.client.db(import_configuration.default.mongodb.db).collection(import_mongodb_collections.SHOP_PRODUCTS_COLLECTION);
+}
+function getShopProductSalesCollection() {
+  return import_conf.client.db(import_configuration.default.mongodb.db).collection(import_mongodb_collections.SHOP_PRODUCT_SALES);
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  getShopProductSalesCollection,
   getShopProductsCollection,
   getShopsCollection
 });

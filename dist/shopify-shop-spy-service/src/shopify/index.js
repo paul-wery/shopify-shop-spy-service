@@ -26,7 +26,7 @@ var import_spyShop = require("./spyShop");
 var import_conf = require("@src/mongodb/conf");
 const startSpyShops = async () => {
   const rule = new import_node_schedule.RecurrenceRule();
-  rule.second = new import_node_schedule.Range(0, 59, 30);
+  rule.second = new import_node_schedule.Range(0, 59, 60);
   const job = (0, import_node_schedule.scheduleJob)(rule, async () => {
     await import_conf.client.connect();
     console.log("RUNNING");

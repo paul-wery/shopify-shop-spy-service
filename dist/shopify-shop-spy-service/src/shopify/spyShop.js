@@ -33,69 +33,64 @@ module.exports = __toCommonJS(spyShop_exports);
 var import_updateShop = require("@src/mongodb/updateShop");
 var import_dayjs = __toESM(require("dayjs"));
 var import_getShopProducts = require("./getShopProducts");
-function defaultProductFromShopifyProduct(product) {
+var import_collections = require("@src/mongodb/collections");
+function shopifyProductToProductModel(shopId, product) {
   return {
+    shopId,
     url: product.handle,
     name: product.title,
     image: product.images[0]?.src,
     price: parseFloat(product.variants[0].price),
-    createdAt: (0, import_dayjs.default)(product.published_at).unix(),
-    lastSaleAt: 0,
-    sales: []
+    createdAt: (0, import_dayjs.default)(product.published_at).unix()
   };
 }
-const updateProductSalesData = async (shopifyProduct, product, currentTime) => {
+const updateProductSalesData = (shop, shopifyProduct, currentHour) => {
   const variants = shopifyProduct.variants;
-  const lastCount = product.sales[product.sales.length - 1].count;
-  if (lastCount === -1) {
-    product.sales[product.sales.length - 1].count = 0;
-  } else {
+  let count = 0;
+  if (shop.lastUpdate) {
     for (const variant of variants) {
-      if (product.lastSaleAt < (0, import_dayjs.default)(variant.updated_at).unix()) {
-        product.sales[product.sales.length - 1].count += 1;
+      if (shop.lastUpdate < (0, import_dayjs.default)(variant.updated_at).unix()) {
+        count += 1;
       }
     }
   }
-  product.lastSaleAt = currentTime;
-  return product;
+  return {
+    shopId: shop._id,
+    productUrl: shopifyProduct.handle,
+    count,
+    date: currentHour
+  };
 };
 async function createMissingOrUpdateProducts(shop) {
-  const shopProducts = [];
-  const shopifyProducts = await (0, import_getShopProducts.getShopProducts)(shop.url);
+  const shopifyProducts = await (0, import_getShopProducts.getShopProducts)(shop);
   const currentTime = (0, import_dayjs.default)().unix();
   const currentHour = (0, import_dayjs.default)().startOf("hour").unix();
+  const products = [];
+  const sales = [];
   for (let index = 0; index < shopifyProducts.length; index++) {
     const shopifyProduct = shopifyProducts[index];
-    const shopProduct = shop.products.find(
-      (product) => product.url === shopifyProduct.handle
-    );
-    const defaultShopProduct = defaultProductFromShopifyProduct(shopifyProduct);
-    if (shopProduct) {
-      defaultShopProduct.lastSaleAt = shopProduct.lastSaleAt;
-      defaultShopProduct.sales = shopProduct.sales;
-    } else {
-      defaultShopProduct.sales = [{ date: currentHour, count: -1 }];
+    const newSale = updateProductSalesData(shop, shopifyProduct, currentHour);
+    if (newSale.count > 0) {
+      sales.push(newSale);
+      products.push(shopifyProductToProductModel(shop._id, shopifyProduct));
     }
-    const lastSale = defaultShopProduct.sales[defaultShopProduct.sales.length - 1];
-    if (lastSale.date !== currentHour) {
-      defaultShopProduct.sales.push({ date: currentHour, count: 0 });
-    }
-    await updateProductSalesData(
-      shopifyProduct,
-      defaultShopProduct,
-      currentTime
-    );
-    shopProducts.push(defaultShopProduct);
   }
-  shop.products = shopProducts;
+  if (!shop.lastUpdate) {
+    const shopsCollection = (0, import_collections.getShopsCollection)();
+    await shopsCollection.updateOne(
+      { _id: shop._id },
+      { $set: { lastUpdate: currentTime } }
+    );
+  } else if (sales.length > 0) {
+    shop.lastUpdate = currentTime;
+    await (0, import_updateShop.updateShop)(shop, products, sales);
+  }
 }
 async function spyShop(shop) {
   try {
-    shop.products = shop.products || [];
     console.log("START", shop.url);
     await createMissingOrUpdateProducts(shop);
     console.log("END", shop.url);
-    await (0, import_updateShop.updateShop)(shop);
   } catch (error) {
     console.error(`Catched error on shop ${shop.url}`, error.message);
   }

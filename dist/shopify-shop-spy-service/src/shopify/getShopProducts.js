@@ -30,14 +30,28 @@ __export(getShopProducts_exports, {
   getShopProducts: () => getShopProducts
 });
 module.exports = __toCommonJS(getShopProducts_exports);
-var import_axios = __toESM(require("axios"));
+var import_configuration = __toESM(require("@src/configuration"));
+var import_updateShop = require("@src/mongodb/updateShop");
+var import_proxy = require("@src/proxy/index");
+var import_shop_model = require("@src/types/shop-model");
 const LIMIT_BY_PAGE = 250;
-const getShopProducts = async (url) => {
+const MAX_SHOP_PRODUCTS = import_configuration.default.limits.maxShopProducts;
+const PAGE_LIMIT = MAX_SHOP_PRODUCTS / LIMIT_BY_PAGE;
+const average = {};
+async function handleExceedLimit(shop, products) {
+  if (products.length >= MAX_SHOP_PRODUCTS) {
+    await (0, import_updateShop.updateShopStatus)(shop, import_shop_model.ShopStatus.OUT_OF_LIMIT);
+    return [];
+  }
+  return products;
+}
+const getShopProducts = async (shop) => {
+  const url = shop.url;
   const products = [];
   let limitReached = false;
   let page = 1;
-  while (!limitReached) {
-    const response = await import_axios.default.get(
+  while (!limitReached && page <= PAGE_LIMIT) {
+    const response = await import_proxy.poolRequest.get(
       `${url}/products.json?page=${page}&limit=${LIMIT_BY_PAGE}`
     );
     const _products = response.data.products;
@@ -46,7 +60,15 @@ const getShopProducts = async (url) => {
     if (_products.length < LIMIT_BY_PAGE)
       limitReached = true;
   }
-  return products;
+  console.log(
+    `[ ${url} ] : ${products.length} products / rounded to ${(page - 1) * LIMIT_BY_PAGE} products`
+  );
+  average[url] = (page - 1) * LIMIT_BY_PAGE;
+  console.log(
+    "Average : ",
+    Object.values(average).reduce((a, b) => a + b, 0) / Object.values(average).length
+  );
+  return handleExceedLimit(shop, products);
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

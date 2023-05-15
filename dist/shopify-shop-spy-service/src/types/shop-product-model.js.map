@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../../../src/types/shop-product-model.ts"],
-  "sourcesContent": ["import { ShopProductSalesModel } from './shop-product-sales-model';\n\nexport interface ShopProductModel {\n  url: string;\n  name: string;\n  image: string;\n  price: number;\n  createdAt: number;\n  lastSaleAt: number;\n  sales: ShopProductSalesModel[];\n}\n"],
+  "sourcesContent": ["import { ObjectId } from 'mongodb';\n\nexport interface ShopProductModel {\n  shopId: ObjectId;\n  url: string;\n  name: string;\n  image: string;\n  price: number;\n  createdAt: number;\n}\n"],
   "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
   "names": []
 }

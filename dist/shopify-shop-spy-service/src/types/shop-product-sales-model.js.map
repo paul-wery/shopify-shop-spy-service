@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../../../src/types/shop-product-sales-model.ts"],
-  "sourcesContent": ["// Sales per hour\nexport interface ShopProductSalesModel {\n  count: number;\n  date: number;\n}\n"],
+  "sourcesContent": ["import { ObjectId } from 'mongodb';\n\nexport interface ShopProductSaleModel {\n  shopId: ObjectId;\n  productUrl: string;\n  count: number;\n  date: number;\n}\n"],
   "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
   "names": []
 }

@@ -34,6 +34,9 @@ const configuration = {
   mongodb: {
     uri: process.env.MONGODB_URI,
     db: process.env.MONGODB_DB
+  },
+  limits: {
+    maxShopProducts: Number(process.env.MAX_SHOP_PRODUCTS)
   }
 };
 var configuration_default = configuration;

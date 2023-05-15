@@ -25,38 +25,66 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var getShops_exports = {};
-__export(getShops_exports, {
-  getShops: () => getShops
+var proxy_exports = {};
+__export(proxy_exports, {
+  PoolRequest: () => PoolRequest,
+  poolRequest: () => poolRequest
 });
-module.exports = __toCommonJS(getShops_exports);
-var import_shop_model = require("@src/types/shop-model");
-var import_dayjs = __toESM(require("dayjs"));
-var import_collections = require("./collections");
-async function getShops() {
-  try {
-    const start = (0, import_dayjs.default)();
-    const shopsCollection = (0, import_collections.getShopsCollection)();
-    const query = shopsCollection.aggregate([
-      {
-        $match: {
-          subscribersCount: { $gt: 0 },
-          status: { $ne: import_shop_model.ShopStatus.OUT_OF_LIMIT }
-        }
-      }
-    ]);
-    const data = await query.toArray();
-    console.log(
-      `getShops (${data.length}) in : ${(0, import_dayjs.default)().diff(start, "second")}s`
-    );
-    return data;
-  } catch (error) {
-    console.error(error.message);
+module.exports = __toCommonJS(proxy_exports);
+var import_axios = __toESM(require("axios"));
+var import_uuid = require("uuid");
+const { PROXY_USERNAME, PROXY_PASSWORD } = process.env;
+class PoolRequest {
+  _MAX_REQUESTS_BY_ID = 50;
+  _sessionId;
+  _requestsCount;
+  _logs = [];
+  constructor() {
+    this._switchSession();
   }
-  return [];
+  _switchSession() {
+    console.info("Switching session");
+    this._logs.push({
+      sessionId: this._sessionId,
+      requestsCount: this._requestsCount
+    });
+    this._sessionId = (0, import_uuid.v4)().replace(/-/g, "");
+    this._requestsCount = 0;
+  }
+  get(url) {
+    this._requestsCount++;
+    if (this._requestsCount >= this._MAX_REQUESTS_BY_ID) {
+      this._switchSession();
+    }
+    try {
+      return (0, import_axios.default)(url, {
+        proxy: {
+          protocol: "http",
+          host: "zproxy.lum-superproxy.io",
+          port: 22225,
+          auth: {
+            // username: `${PROXY_USERNAME}-session-${this._sessionId}`,
+            username: `${PROXY_USERNAME}`,
+            password: PROXY_PASSWORD
+          }
+        }
+      });
+    } catch (error) {
+      console.error(error.message);
+      if (error.message.includes("430")) {
+        this._switchSession();
+      }
+    }
+    return;
+  }
+  getLogs() {
+    return this._logs;
+  }
 }
+const poolRequest = new PoolRequest();
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  getShops
+  PoolRequest,
+  poolRequest
 });
-//# sourceMappingURL=getShops.js.map
+//# sourceMappingURL=index.js.map

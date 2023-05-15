@@ -6,7 +6,7 @@ import { client } from '@src/mongodb/conf';
 export const startSpyShops = async () => {
   const rule = new RecurrenceRule();
 
-  rule.second = new Range(0, 59, 30);
+  rule.second = new Range(0, 59, 60);
 
   const job = scheduleJob(rule, async () => {
     await client.connect();

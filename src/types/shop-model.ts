@@ -1,4 +1,7 @@
-import { ShopProductModel } from './shop-product-model';
+export enum ShopStatus {
+  ACTIVE = 'ACTIVE',
+  OUT_OF_LIMIT = 'OUT_OF_LIMIT',
+}
 
 export interface ShopModel {
   url: string;
@@ -7,5 +10,6 @@ export interface ShopModel {
   about: string;
   currency: string;
   subscribersCount: number;
-  products: ShopProductModel[];
+  lastUpdate: number;
+  status: ShopStatus;
 }

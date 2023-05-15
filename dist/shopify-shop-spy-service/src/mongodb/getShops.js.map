@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../../../src/mongodb/getShops.ts"],
-  "sourcesContent": ["import { getShopsCollection } from './collections';\n\nexport async function getShops() {\n  try {\n    const shopsCollection = getShopsCollection();\n\n    return shopsCollection.find({ subscribersCount: { $gt: 0 } }).toArray();\n  } catch (error) {\n    console.error(error.message);\n  }\n  return [];\n}\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,yBAAmC;AAEnC,eAAsB,WAAW;AAC/B,MAAI;AACF,UAAM,sBAAkB,uCAAmB;AAE3C,WAAO,gBAAgB,KAAK,EAAE,kBAAkB,EAAE,KAAK,EAAE,EAAE,CAAC,EAAE,QAAQ;AAAA,EACxE,SAAS,OAAP;AACA,YAAQ,MAAM,MAAM,OAAO;AAAA,EAC7B;AACA,SAAO,CAAC;AACV;",
-  "names": []
+  "sourcesContent": ["import { ShopModel, ShopStatus } from '@src/types/shop-model';\nimport dayjs from 'dayjs';\nimport { WithId } from 'mongodb';\nimport { getShopsCollection } from './collections';\n\nexport async function getShops(): Promise<WithId<ShopModel>[]> {\n  try {\n    const start = dayjs();\n    const shopsCollection = getShopsCollection();\n    const query = shopsCollection.aggregate([\n      {\n        $match: {\n          subscribersCount: { $gt: 0 },\n          status: { $ne: ShopStatus.OUT_OF_LIMIT },\n        },\n      },\n    ]);\n    const data = (await query.toArray()) as WithId<ShopModel>[];\n\n    console.log(\n      `getShops (${data.length}) in : ${dayjs().diff(start, 'second')}s`\n    );\n\n    return data;\n  } catch (error) {\n    console.error(error.message);\n  }\n  return [];\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,wBAAsC;AACtC,mBAAkB;AAElB,yBAAmC;AAEnC,eAAsB,WAAyC;AAC7D,MAAI;AACF,UAAM,YAAQ,aAAAA,SAAM;AACpB,UAAM,sBAAkB,uCAAmB;AAC3C,UAAM,QAAQ,gBAAgB,UAAU;AAAA,MACtC;AAAA,QACE,QAAQ;AAAA,UACN,kBAAkB,EAAE,KAAK,EAAE;AAAA,UAC3B,QAAQ,EAAE,KAAK,6BAAW,aAAa;AAAA,QACzC;AAAA,MACF;AAAA,IACF,CAAC;AACD,UAAM,OAAQ,MAAM,MAAM,QAAQ;AAElC,YAAQ;AAAA,MACN,aAAa,KAAK,oBAAgB,aAAAA,SAAM,EAAE,KAAK,OAAO,QAAQ;AAAA,IAChE;AAEA,WAAO;AAAA,EACT,SAAS,OAAP;AACA,YAAQ,MAAM,MAAM,OAAO;AAAA,EAC7B;AACA,SAAO,CAAC;AACV;",
+  "names": ["dayjs"]
 }
