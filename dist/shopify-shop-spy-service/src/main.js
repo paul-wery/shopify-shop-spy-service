@@ -28,5 +28,6 @@ const app = (0, import_express.default)();
 app.listen(port, host, () => {
   console.log(`[ ready ] http://${host}:${port}`);
 });
+(0, import_shopify.startCollectThemes)();
 (0, import_shopify.startSpyShops)();
 //# sourceMappingURL=main.js.map

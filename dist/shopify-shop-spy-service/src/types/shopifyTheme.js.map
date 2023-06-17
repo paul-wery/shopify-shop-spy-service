@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/types/shopifyTheme.ts"],
+  "sourcesContent": ["export interface ShopifyTheme {\n  id: string;\n  url: string;\n}\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

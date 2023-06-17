@@ -29,12 +29,16 @@ var collections_exports = {};
 __export(collections_exports, {
   getShopProductSalesCollection: () => getShopProductSalesCollection,
   getShopProductsCollection: () => getShopProductsCollection,
-  getShopsCollection: () => getShopsCollection
+  getShopsCollection: () => getShopsCollection,
+  getThemesCollection: () => getThemesCollection
 });
 module.exports = __toCommonJS(collections_exports);
 var import_mongodb_collections = require("./mongodb-collections");
 var import_configuration = __toESM(require("@src/configuration"));
 var import_conf = require("@src/mongodb/conf");
+function getThemesCollection() {
+  return import_conf.client.db(import_configuration.default.mongodb.db).collection(import_mongodb_collections.THEMES_COLLECTION);
+}
 function getShopsCollection() {
   return import_conf.client.db(import_configuration.default.mongodb.db).collection(import_mongodb_collections.SHOPS_COLLECTION);
 }
@@ -48,6 +52,7 @@ function getShopProductSalesCollection() {
 0 && (module.exports = {
   getShopProductSalesCollection,
   getShopProductsCollection,
-  getShopsCollection
+  getShopsCollection,
+  getThemesCollection
 });
 //# sourceMappingURL=collections.js.map

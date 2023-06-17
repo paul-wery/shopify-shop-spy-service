@@ -23,6 +23,7 @@ __export(mongodb_collections_exports, {
   SHOP_PRODUCTS_COLLECTION: () => SHOP_PRODUCTS_COLLECTION,
   SHOP_PRODUCT_SALES: () => SHOP_PRODUCT_SALES,
   SUBSCRIBED_SHOPS_COLLECTION: () => SUBSCRIBED_SHOPS_COLLECTION,
+  THEMES_COLLECTION: () => THEMES_COLLECTION,
   USERS_COLLECTION: () => USERS_COLLECTION
 });
 module.exports = __toCommonJS(mongodb_collections_exports);
@@ -33,6 +34,7 @@ const SHOPS_COLLECTION = `shops`;
 const SHOP_PRODUCTS_COLLECTION = `products`;
 const SHOP_PRODUCT_SALES = `sales`;
 const SUBSCRIBED_SHOPS_COLLECTION = `subscribed-shops`;
+const THEMES_COLLECTION = `themes`;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   INVITES_COLLECTION,
@@ -41,6 +43,7 @@ const SUBSCRIBED_SHOPS_COLLECTION = `subscribed-shops`;
   SHOP_PRODUCTS_COLLECTION,
   SHOP_PRODUCT_SALES,
   SUBSCRIBED_SHOPS_COLLECTION,
+  THEMES_COLLECTION,
   USERS_COLLECTION
 });
 //# sourceMappingURL=mongodb-collections.js.map

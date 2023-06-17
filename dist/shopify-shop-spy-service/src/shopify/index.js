@@ -17,6 +17,7 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var shopify_exports = {};
 __export(shopify_exports, {
+  startCollectThemes: () => startCollectThemes,
   startSpyShops: () => startSpyShops
 });
 module.exports = __toCommonJS(shopify_exports);
@@ -24,12 +25,24 @@ var import_getShops = require("@src/mongodb/getShops");
 var import_node_schedule = require("node-schedule");
 var import_spyShop = require("./spyShop");
 var import_conf = require("@src/mongodb/conf");
+var import_collectThemes = require("./collectThemes");
+const startCollectThemes = async () => {
+  const rule = new import_node_schedule.RecurrenceRule();
+  rule.hour = 0;
+  rule.minute = 0;
+  const job = (0, import_node_schedule.scheduleJob)(rule, async () => {
+    await import_conf.client.connect();
+    console.log("RUNNING startCollectThemes");
+    await (0, import_collectThemes.collectThemes)();
+  });
+  return job;
+};
 const startSpyShops = async () => {
   const rule = new import_node_schedule.RecurrenceRule();
   rule.second = new import_node_schedule.Range(0, 59, 60);
   const job = (0, import_node_schedule.scheduleJob)(rule, async () => {
     await import_conf.client.connect();
-    console.log("RUNNING");
+    console.log("RUNNING startSpyShops");
     const shops = await (0, import_getShops.getShops)();
     for (let index = 0; index < shops.length; index++) {
       const shop = shops[index];
@@ -40,6 +53,7 @@ const startSpyShops = async () => {
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  startCollectThemes,
   startSpyShops
 });
 //# sourceMappingURL=index.js.map

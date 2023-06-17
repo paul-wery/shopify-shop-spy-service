@@ -1,7 +1,5 @@
-import dayjs from 'dayjs';
 import express from 'express';
-import { poolRequest } from './proxy';
-import { startSpyShops } from './shopify';
+import { startCollectThemes, startSpyShops } from './shopify';
 
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3333;
@@ -12,6 +10,7 @@ app.listen(port, host, () => {
   console.log(`[ ready ] http://${host}:${port}`);
 });
 
+startCollectThemes();
 startSpyShops();
 
 // async function testMaxRequest() {
