@@ -32,38 +32,16 @@ __export(proxy_exports, {
 });
 module.exports = __toCommonJS(proxy_exports);
 var import_axios = __toESM(require("axios"));
-var import_uuid = require("uuid");
-const { PROXY_USERNAME, PROXY_PASSWORD } = process.env;
+const { PROXY_HOST, PROXY_PORT, PROXY_USERNAME, PROXY_PASSWORD } = process.env;
 class PoolRequest {
-  _MAX_REQUESTS_BY_ID = 50;
-  _sessionId;
-  _requestsCount;
-  _logs = [];
-  constructor() {
-    this._switchSession();
-  }
-  _switchSession() {
-    console.info("Switching session");
-    this._logs.push({
-      sessionId: this._sessionId,
-      requestsCount: this._requestsCount
-    });
-    this._sessionId = (0, import_uuid.v4)().replace(/-/g, "");
-    this._requestsCount = 0;
-  }
   get(url) {
-    this._requestsCount++;
-    if (this._requestsCount >= this._MAX_REQUESTS_BY_ID) {
-      this._switchSession();
-    }
     try {
       return (0, import_axios.default)(url, {
         proxy: {
           protocol: "http",
-          host: "zproxy.lum-superproxy.io",
-          port: 22225,
+          host: PROXY_HOST,
+          port: parseInt(PROXY_PORT),
           auth: {
-            // username: `${PROXY_USERNAME}-session-${this._sessionId}`,
             username: `${PROXY_USERNAME}`,
             password: PROXY_PASSWORD
           }
@@ -71,14 +49,8 @@ class PoolRequest {
       });
     } catch (error) {
       console.error(error.message);
-      if (error.message.includes("430")) {
-        this._switchSession();
-      }
     }
     return;
-  }
-  getLogs() {
-    return this._logs;
   }
 }
 const poolRequest = new PoolRequest();
