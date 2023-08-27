@@ -1,7 +1,7 @@
 {
   "version": 3,
   "sources": ["../../../../src/types/shop-model.ts"],
-  "sourcesContent": ["export enum ShopStatus {\n  ACTIVE = 'ACTIVE',\n  OUT_OF_LIMIT = 'OUT_OF_LIMIT',\n}\n\nexport interface ShopModel {\n  url: string;\n  name: string;\n  logo: string;\n  about: string;\n  currency: string;\n  subscribersCount: number;\n  lastUpdate: number;\n  status: ShopStatus;\n}\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,IAAK,aAAL,kBAAKA,gBAAL;AACL,EAAAA,YAAA,YAAS;AACT,EAAAA,YAAA,kBAAe;AAFL,SAAAA;AAAA,GAAA;",
+  "sourcesContent": ["import { ShopProductModel } from './shop-product-model';\n\nexport enum ShopStatus {\n  ACTIVE = 'ACTIVE',\n  OUT_OF_LIMIT = 'OUT_OF_LIMIT',\n}\n\nexport interface ShopModel {\n  id: string;\n  url: string;\n  name: string;\n  logo: string;\n  about: string;\n  currency: string;\n  theme: {\n    id: string;\n    name: string;\n    url?: string;\n  };\n  subscribersCount: number;\n  lastUpdate: number;\n  status: ShopStatus;\n  products: {\n    array: ShopProductModel[];\n    // Calculated fields (not stored in DB)\n    total: {\n      sales: number;\n      turnover: number;\n    };\n  };\n\n  createdAt: number;\n\n  // Saved every hours from fetch-shops.ts\n  turnover: number;\n  sales: number;\n  updatedAt: number;\n\n  // Added fields\n  subscribedAt: number;\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAEO,IAAK,aAAL,kBAAKA,gBAAL;AACL,EAAAA,YAAA,YAAS;AACT,EAAAA,YAAA,kBAAe;AAFL,SAAAA;AAAA,GAAA;",
   "names": ["ShopStatus"]
 }

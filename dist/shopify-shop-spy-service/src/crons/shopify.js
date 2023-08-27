@@ -23,17 +23,18 @@ __export(shopify_exports, {
 module.exports = __toCommonJS(shopify_exports);
 var import_getShops = require("@src/mongodb/getShops");
 var import_node_schedule = require("node-schedule");
-var import_spyShop = require("./spyShop");
 var import_conf = require("@src/mongodb/conf");
-var import_collectThemes = require("./collectThemes");
+var import_spyShop = require("@src/shopify/spyShop");
+var import_collectThemes = require("@src/shopify/collectThemes");
 const startCollectThemes = async () => {
   const rule = new import_node_schedule.RecurrenceRule();
   rule.hour = 0;
   rule.minute = 0;
   const job = (0, import_node_schedule.scheduleJob)(rule, async () => {
     await import_conf.client.connect();
-    console.log("RUNNING startCollectThemes");
+    console.info("RUNNING startCollectThemes");
     await (0, import_collectThemes.collectThemes)();
+    console.info("Done CollectThemes!");
   });
   return job;
 };
@@ -42,12 +43,15 @@ const startSpyShops = async () => {
   rule.second = new import_node_schedule.Range(0, 59, 60);
   const job = (0, import_node_schedule.scheduleJob)(rule, async () => {
     await import_conf.client.connect();
-    console.log("RUNNING startSpyShops");
+    console.info("RUNNING startSpyShops");
     const shops = await (0, import_getShops.getShops)();
+    const promises = [];
     for (let index = 0; index < shops.length; index++) {
       const shop = shops[index];
-      (0, import_spyShop.spyShop)(shop);
+      promises.push((0, import_spyShop.spyShop)(shop));
     }
+    await Promise.all(promises);
+    console.info("Done SpyShops!");
   });
   return job;
 };
@@ -56,4 +60,4 @@ const startSpyShops = async () => {
   startCollectThemes,
   startSpyShops
 });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=shopify.js.map

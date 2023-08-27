@@ -1,5 +1,9 @@
 import express from 'express';
-import { startCollectThemes, startSpyShops } from './shopify';
+import { startCollectThemes, startSpyShops } from './crons/shopify';
+import {
+  startComputeProductsSalesAndTurnover,
+  startComputeSalesAndTurnover,
+} from './crons/database';
 
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3333;
@@ -7,11 +11,13 @@ const port = process.env.PORT ? Number(process.env.PORT) : 3333;
 const app = express();
 
 app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
+  console.info(`[ ready ] http://${host}:${port}`);
 });
 
 startCollectThemes();
 startSpyShops();
+startComputeSalesAndTurnover();
+startComputeProductsSalesAndTurnover();
 
 // async function testMaxRequest() {
 //   const loop = async () => {
@@ -19,7 +25,7 @@ startSpyShops();
 //     let requestNumber = 0;
 //     let count = 0;
 
-//     console.log('Start : ', start.format('HH:mm:ss'));
+//     console.info('Start : ', start.format('HH:mm:ss'));
 //     while (count < 50) {
 //       try {
 //         await Promise.all([
@@ -36,18 +42,18 @@ startSpyShops();
 
 //         requestNumber++;
 //       } catch (error) {
-//         console.log(
+//         console.info(
 //           `${error.message} : ${dayjs().diff(start, 'second') + 's'}`
 //         );
 //         count = 100000;
-//         console.log('Request number : ', requestNumber);
+//         console.info('Request number : ', requestNumber);
 //       }
 //       count++;
 //     }
 //     // Waiting until the end of the minute
 //     const waitingTime = 60 - dayjs().diff(start, 'second') + 1;
 
-//     console.log('Waiting for : ', waitingTime);
+//     console.info('Waiting for : ', waitingTime);
 //     await new Promise((resolve) => setTimeout(resolve, waitingTime * 1000));
 //   };
 

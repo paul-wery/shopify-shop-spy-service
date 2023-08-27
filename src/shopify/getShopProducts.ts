@@ -40,17 +40,17 @@ export const getShopProducts = async (shop: WithId<ShopModel>) => {
     page++;
     if (_products.length < LIMIT_BY_PAGE) limitReached = true;
   }
-  console.log(
-    `[ ${url} ] : ${products.length} products / rounded to ${
-      (page - 1) * LIMIT_BY_PAGE
-    } products`
-  );
+  // console.info(
+  //   `[ ${url} ] : ${products.length} products / rounded to ${
+  //     (page - 1) * LIMIT_BY_PAGE
+  //   } products`
+  // );
   average[url] = (page - 1) * LIMIT_BY_PAGE;
-  console.log(
-    'Average : ',
-    Object.values(average).reduce((a, b) => a + b, 0) /
-      Object.values(average).length
-  );
+  // console.info(
+  //   'Average : ',
+  //   Object.values(average).reduce((a, b) => a + b, 0) /
+  //     Object.values(average).length
+  // );
 
   return handleExceedLimit(shop, products);
 };

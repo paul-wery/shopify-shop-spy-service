@@ -21,13 +21,12 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var import_express = __toESM(require("express"));
-var import_shopify = require("./shopify");
+var import_database = require("./crons/database");
 const host = process.env.HOST ?? "localhost";
 const port = process.env.PORT ? Number(process.env.PORT) : 3333;
 const app = (0, import_express.default)();
 app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
+  console.info(`[ ready ] http://${host}:${port}`);
 });
-(0, import_shopify.startCollectThemes)();
-(0, import_shopify.startSpyShops)();
+(0, import_database.startComputeProductsSalesAndTurnover)();
 //# sourceMappingURL=main.js.map

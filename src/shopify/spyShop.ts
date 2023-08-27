@@ -19,7 +19,7 @@ function shopifyProductToProductModel(
     image: product.images[0]?.src,
     price: parseFloat(product.variants[0].price),
     createdAt: dayjs(product.published_at).unix(),
-  };
+  } as ShopProductModel;
 }
 
 const updateProductSalesData = (
@@ -37,6 +37,9 @@ const updateProductSalesData = (
       }
     }
   }
+  // ignore fake sales
+  if (count > 1 && count === variants.length) count = 1;
+
   return {
     shopId: shop._id,
     productUrl: shopifyProduct.handle,
@@ -76,9 +79,7 @@ async function createMissingOrUpdateProducts(shop: WithId<ShopModel>) {
 
 export async function spyShop(shop: WithId<ShopModel>) {
   try {
-    console.log('START', shop.url);
     await createMissingOrUpdateProducts(shop);
-    console.log('END', shop.url);
   } catch (error) {
     console.error(`Catched error on shop ${shop.url}`, error.message);
   }

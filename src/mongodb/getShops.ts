@@ -17,7 +17,7 @@ export async function getShops(): Promise<WithId<ShopModel>[]> {
     ]);
     const data = (await query.toArray()) as WithId<ShopModel>[];
 
-    console.log(
+    console.info(
       `getShops (${data.length}) in : ${dayjs().diff(start, 'second')}s`
     );
 

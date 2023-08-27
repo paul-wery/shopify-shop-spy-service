@@ -7,4 +7,8 @@ export interface ShopProductModel {
   image: string;
   price: number;
   createdAt: number;
+  // sales: ShopProductSaleModel[]; // Not used on service
+
+  last7DaysSales: number;
+  last7DaysTurnover: number;
 }

@@ -60,14 +60,7 @@ const getShopProducts = async (shop) => {
     if (_products.length < LIMIT_BY_PAGE)
       limitReached = true;
   }
-  console.log(
-    `[ ${url} ] : ${products.length} products / rounded to ${(page - 1) * LIMIT_BY_PAGE} products`
-  );
   average[url] = (page - 1) * LIMIT_BY_PAGE;
-  console.log(
-    "Average : ",
-    Object.values(average).reduce((a, b) => a + b, 0) / Object.values(average).length
-  );
   return handleExceedLimit(shop, products);
 };
 // Annotate the CommonJS export names for ESM import in node:

@@ -46,7 +46,7 @@ async function getShops() {
       }
     ]);
     const data = await query.toArray();
-    console.log(
+    console.info(
       `getShops (${data.length}) in : ${(0, import_dayjs.default)().diff(start, "second")}s`
     );
     return data;

@@ -88,9 +88,7 @@ async function createMissingOrUpdateProducts(shop) {
 }
 async function spyShop(shop) {
   try {
-    console.log("START", shop.url);
     await createMissingOrUpdateProducts(shop);
-    console.log("END", shop.url);
   } catch (error) {
     console.error(`Catched error on shop ${shop.url}`, error.message);
   }
