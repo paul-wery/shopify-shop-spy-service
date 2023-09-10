@@ -17,6 +17,7 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var mongodb_collections_exports = {};
 __export(mongodb_collections_exports, {
+  APPS_COLLECTION: () => APPS_COLLECTION,
   INVITES_COLLECTION: () => INVITES_COLLECTION,
   ORGANIZATIONS_COLLECTION: () => ORGANIZATIONS_COLLECTION,
   SHOPS_COLLECTION: () => SHOPS_COLLECTION,
@@ -35,8 +36,10 @@ const SHOP_PRODUCTS_COLLECTION = `products`;
 const SHOP_PRODUCT_SALES = `sales`;
 const SUBSCRIBED_SHOPS_COLLECTION = `subscribed-shops`;
 const THEMES_COLLECTION = `themes`;
+const APPS_COLLECTION = `apps`;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  APPS_COLLECTION,
   INVITES_COLLECTION,
   ORGANIZATIONS_COLLECTION,
   SHOPS_COLLECTION,

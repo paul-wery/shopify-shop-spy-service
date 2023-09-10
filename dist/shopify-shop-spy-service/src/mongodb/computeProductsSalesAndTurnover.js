@@ -192,7 +192,6 @@ const computeProductsSalesAndTurnover = async (shop) => {
             { url: product.url },
             {
               $set: {
-                currency: "",
                 last7DaysSales: product.sales,
                 last7DaysTurnover: product.turnover
               }

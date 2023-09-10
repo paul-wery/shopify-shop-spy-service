@@ -1,5 +1,9 @@
 import express from 'express';
-import { startCollectThemes, startSpyShops } from './crons/shopify';
+import {
+  startCollectApps,
+  startCollectThemes,
+  startSpyShops,
+} from './crons/shopify';
 import {
   startComputeProductsSalesAndTurnover,
   startComputeSalesAndTurnover,
@@ -14,6 +18,7 @@ app.listen(port, host, () => {
   console.info(`[ ready ] http://${host}:${port}`);
 });
 
+// startCollectApps();
 startCollectThemes();
 startSpyShops();
 startComputeSalesAndTurnover();

@@ -54,6 +54,8 @@ const updateProductSalesData = (shop, shopifyProduct, currentHour) => {
       }
     }
   }
+  if (count > 1 && count === variants.length)
+    count = 1;
   return {
     shopId: shop._id,
     productUrl: shopifyProduct.handle,

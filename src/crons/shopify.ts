@@ -4,6 +4,26 @@ import { Range, RecurrenceRule, scheduleJob } from 'node-schedule';
 import { client } from '@src/mongodb/conf';
 import { spyShop } from '@src/shopify/spyShop';
 import { collectThemes } from '@src/shopify/collectThemes';
+import { collectApps } from '@src/shopify/collectApps';
+import { findShopsApps } from '@src/shopify/findShopsApps';
+
+export const startCollectApps = async () => {
+  // await collectApps();
+  await findShopsApps();
+  // const rule = new RecurrenceRule();
+
+  // rule.hour = 0;
+  // rule.minute = 0;
+
+  // const job = scheduleJob(rule, async () => {
+  //   await client.connect();
+  //   console.info('RUNNING startCollectApps');
+  //   await collectApps();
+  //   console.info('Done CollectApps!');
+  // });
+
+  // return job;
+};
 
 export const startCollectThemes = async () => {
   const rule = new RecurrenceRule();

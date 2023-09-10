@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import { ShopProductModel } from './shop-product-model';
 
 export enum ShopStatus {
@@ -28,10 +29,11 @@ export interface ShopModel {
       turnover: number;
     };
   };
+  installedApps: ObjectId[];
 
   createdAt: number;
 
-  // Saved every hours from fetch-shops.ts
+  // Calculated from service
   turnover: number;
   sales: number;
   updatedAt: number;

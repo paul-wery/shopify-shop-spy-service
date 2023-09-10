@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/mongodb/updateApp.ts"],
+  "sourcesContent": ["import { AppModel } from '@src/types/app-model';\nimport { getAppsCollection } from './collections';\n\nexport async function updateApps(apps: Partial<AppModel>[]) {\n  const collection = getAppsCollection();\n\n  await Promise.all(\n    apps.map((app) =>\n      collection.updateOne(\n        { handle: app.handle },\n        { $set: app },\n        { upsert: true }\n      )\n    )\n  );\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AACA,yBAAkC;AAElC,eAAsB,WAAW,MAA2B;AAC1D,QAAM,iBAAa,sCAAkB;AAErC,QAAM,QAAQ;AAAA,IACZ,KAAK;AAAA,MAAI,CAAC,QACR,WAAW;AAAA,QACT,EAAE,QAAQ,IAAI,OAAO;AAAA,QACrB,EAAE,MAAM,IAAI;AAAA,QACZ,EAAE,QAAQ,KAAK;AAAA,MACjB;AAAA,IACF;AAAA,EACF;AACF;",
+  "names": []
+}

@@ -14,3 +14,4 @@ export const SHOP_PRODUCTS_COLLECTION = `products`;
 export const SHOP_PRODUCT_SALES = `sales`;
 export const SUBSCRIBED_SHOPS_COLLECTION = `subscribed-shops`;
 export const THEMES_COLLECTION = `themes`;
+export const APPS_COLLECTION = `apps`;

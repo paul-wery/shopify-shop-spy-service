@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/types/app-model.ts"],
+  "sourcesContent": ["export interface AppModel {\n  handle: string;\n  name: string;\n  category: string;\n  rating: number;\n  reviewsCount: number;\n}\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

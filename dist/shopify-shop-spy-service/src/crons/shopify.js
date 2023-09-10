@@ -17,6 +17,7 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var shopify_exports = {};
 __export(shopify_exports, {
+  startCollectApps: () => startCollectApps,
   startCollectThemes: () => startCollectThemes,
   startSpyShops: () => startSpyShops
 });
@@ -26,6 +27,10 @@ var import_node_schedule = require("node-schedule");
 var import_conf = require("@src/mongodb/conf");
 var import_spyShop = require("@src/shopify/spyShop");
 var import_collectThemes = require("@src/shopify/collectThemes");
+var import_findShopsApps = require("@src/shopify/findShopsApps");
+const startCollectApps = async () => {
+  await (0, import_findShopsApps.findShopsApps)();
+};
 const startCollectThemes = async () => {
   const rule = new import_node_schedule.RecurrenceRule();
   rule.hour = 0;
@@ -57,6 +62,7 @@ const startSpyShops = async () => {
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  startCollectApps,
   startCollectThemes,
   startSpyShops
 });

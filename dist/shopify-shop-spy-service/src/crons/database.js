@@ -41,21 +41,14 @@ const startComputeSalesAndTurnover = async () => {
   return job;
 };
 const startComputeProductsSalesAndTurnover = async () => {
-  const shops = await (0, import_getShops.getShops)();
-  for (let index = 0; index < shops.length; index++) {
-    const shop = shops[index];
-    await (0, import_computeProductsSalesAndTurnover.computeProductsSalesAndTurnover)(shop);
-    process.stdout.write(`Processed: ${index + 1}/${shops.length}\r`);
-  }
-  console.info("DONE ComputeProductsSalesAndTurnover");
   const job = (0, import_node_schedule.scheduleJob)("0 0 * * *", async () => {
     await import_conf.client.connect();
     console.info("RUNNING ComputeProductsSalesAndTurnover");
-    const shops2 = await (0, import_getShops.getShops)();
-    for (let index = 0; index < shops2.length; index++) {
-      const shop = shops2[index];
+    const shops = await (0, import_getShops.getShops)();
+    for (let index = 0; index < shops.length; index++) {
+      const shop = shops[index];
       await (0, import_computeProductsSalesAndTurnover.computeProductsSalesAndTurnover)(shop);
-      process.stdout.write(`Processed: ${index + 1}/${shops2.length}\r`);
+      process.stdout.write(`Processed: ${index + 1}/${shops.length}\r`);
     }
     console.info("DONE ComputeProductsSalesAndTurnover");
   });

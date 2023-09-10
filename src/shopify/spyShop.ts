@@ -38,7 +38,7 @@ const updateProductSalesData = (
     }
   }
   // ignore fake sales
-  if (count > 1 && count === variants.length) count = 1;
+  if (count > 1 && count === variants.length) count = 0;
 
   return {
     shopId: shop._id,
