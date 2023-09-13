@@ -17,6 +17,15 @@ export async function updateShopStatus(
   await shopsCollection.updateOne({ _id: shop._id }, { $set: { status } });
 }
 
+export async function banShopFromBestProducts(shop: WithId<ShopModel>) {
+  const collection = getShopsCollection();
+
+  await collection.updateOne(
+    { _id: shop._id },
+    { $set: { bannedFromBestProducts: true } }
+  );
+}
+
 export async function updateShop(
   shop: WithId<ShopModel>,
   products: ShopProductModel[],

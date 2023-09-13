@@ -1,4 +1,4 @@
-import { updateShop } from '@src/mongodb/updateShop';
+import { banShopFromBestProducts, updateShop } from '@src/mongodb/updateShop';
 import { ShopifyProduct } from '@src/types';
 import { ShopModel } from '@src/types/shop-model';
 import { ShopProductModel } from '@src/types/shop-product-model';
@@ -38,7 +38,7 @@ const updateProductSalesData = (
     }
   }
   // ignore fake sales
-  if (count > 1 && count === variants.length) count = 0;
+  if (count > 1 && count === variants.length) count = 1;
 
   return {
     shopId: shop._id,
@@ -72,8 +72,16 @@ async function createMissingOrUpdateProducts(shop: WithId<ShopModel>) {
       { $set: { lastUpdate: currentTime } }
     );
   } else if (sales.length > 0) {
+    const shopHasFakeSales =
+      shopifyProducts.length > 2 && sales.length === shopifyProducts.length;
+
     shop.lastUpdate = currentTime;
-    await updateShop(shop, products, sales);
+    if (shopHasFakeSales) {
+      await banShopFromBestProducts(shop);
+    } else {
+      if (shop.bannedFromBestProducts) shop.bannedFromBestProducts = false;
+      await updateShop(shop, products, sales);
+    }
   }
 }
 

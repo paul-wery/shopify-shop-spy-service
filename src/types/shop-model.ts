@@ -40,4 +40,7 @@ export interface ShopModel {
 
   // Added fields
   subscribedAt: number;
+
+  // Added fields when all products updated same time
+  bannedFromBestProducts?: boolean;
 }

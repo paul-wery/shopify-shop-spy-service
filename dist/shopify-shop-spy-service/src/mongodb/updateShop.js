@@ -17,6 +17,7 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var updateShop_exports = {};
 __export(updateShop_exports, {
+  banShopFromBestProducts: () => banShopFromBestProducts,
   updateShop: () => updateShop,
   updateShopStatus: () => updateShopStatus
 });
@@ -25,6 +26,13 @@ var import_collections = require("./collections");
 async function updateShopStatus(shop, status) {
   const shopsCollection = (0, import_collections.getShopsCollection)();
   await shopsCollection.updateOne({ _id: shop._id }, { $set: { status } });
+}
+async function banShopFromBestProducts(shop) {
+  const collection = (0, import_collections.getShopsCollection)();
+  await collection.updateOne(
+    { _id: shop._id },
+    { $set: { bannedFromBestProducts: true } }
+  );
 }
 async function updateShop(shop, products, sales) {
   try {
@@ -76,6 +84,7 @@ async function updateShop(shop, products, sales) {
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  banShopFromBestProducts,
   updateShop,
   updateShopStatus
 });
