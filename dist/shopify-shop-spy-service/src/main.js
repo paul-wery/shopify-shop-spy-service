@@ -21,16 +21,13 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var import_express = __toESM(require("express"));
-var import_shopify = require("./crons/shopify");
-var import_database = require("./crons/database");
+var import_tiktok_ads = require("./crons/tiktok-ads");
+var import_firebase = require("./firebase");
 const host = process.env.HOST ?? "localhost";
 const port = process.env.PORT ? Number(process.env.PORT) : 3333;
 const app = (0, import_express.default)();
 app.listen(port, host, () => {
   console.info(`[ ready ] http://${host}:${port}`);
 });
-(0, import_shopify.startCollectThemes)();
-(0, import_shopify.startSpyShops)();
-(0, import_database.startComputeSalesAndTurnover)();
-(0, import_database.startComputeProductsSalesAndTurnover)();
+(0, import_tiktok_ads.startSpyTiktokAds)();
 //# sourceMappingURL=main.js.map

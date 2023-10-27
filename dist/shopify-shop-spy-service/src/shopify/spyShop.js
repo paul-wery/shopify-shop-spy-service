@@ -30,6 +30,7 @@ __export(spyShop_exports, {
   spyShop: () => spyShop
 });
 module.exports = __toCommonJS(spyShop_exports);
+var import_updateShop = require("@src/mongodb/updateShop");
 var import_dayjs = __toESM(require("dayjs"));
 var import_getShopProducts = require("./getShopProducts");
 var import_collections = require("@src/mongodb/collections");
@@ -85,15 +86,12 @@ async function createMissingOrUpdateProducts(shop) {
   } else if (sales.length > 0) {
     const shopHasFakeSales = shopifyProducts.length > 2 && sales.length === shopifyProducts.length;
     shop.lastUpdate = currentTime;
-    console.log(
-      `${shop.url} / sales : ${sales.length} products : ${shopifyProducts.length} / is same length : ${shopHasFakeSales}`
-    );
     if (shopHasFakeSales) {
-      console.log("Banned from best products");
+      await (0, import_updateShop.banShopFromBestProducts)(shop);
     } else {
-      console.log("Not banned from best products");
       if (shop.bannedFromBestProducts)
         shop.bannedFromBestProducts = false;
+      await (0, import_updateShop.updateShop)(shop, products, sales);
     }
   }
 }

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/constants/index.ts"],
+  "sourcesContent": ["import { GOOGLE_ACCOUNT } from '@src/types/google-account';\n\nexport const TIKTOK_ROOT =\n  'https://ads.tiktok.com/business/creativecenter/inspiration/topads/pc/en';\n\nexport const ACCOUNTS = JSON.parse(process.env.GOOGLE_ACCOUNTS as string)\n  .array as GOOGLE_ACCOUNT[];\n\nexport const TIKTOK_ACCOUNTS_POOL = ACCOUNTS.map((e) => ({\n  ...e,\n  blocked: false,\n}));\n\nexport const NO_ACCOUNTS_ERROR =\n  'Login with Google: Failed - No valid accounts';\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAEO,MAAM,cACX;AAEK,MAAM,WAAW,KAAK,MAAM,QAAQ,IAAI,eAAyB,EACrE;AAEI,MAAM,uBAAuB,SAAS,IAAI,CAAC,OAAO;AAAA,EACvD,GAAG;AAAA,EACH,SAAS;AACX,EAAE;AAEK,MAAM,oBACX;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/types/tiktok-ads-config-model.ts"],
+  "sourcesContent": ["export const industryCodesLabels = {\n  '30': 'E-commerce',\n  '25': 'Games',\n  '20': 'Apps',\n};\n\nexport interface TiktokAdsConfigModel {\n  countries: string[];\n  languages: string[];\n  industryCodes: string[];\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAO,MAAM,sBAAsB;AAAA,EACjC,MAAM;AAAA,EACN,MAAM;AAAA,EACN,MAAM;AACR;",
+  "names": []
+}

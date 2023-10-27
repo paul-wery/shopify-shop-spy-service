@@ -31,12 +31,20 @@ __export(collections_exports, {
   getShopProductSalesCollection: () => getShopProductSalesCollection,
   getShopProductsCollection: () => getShopProductsCollection,
   getShopsCollection: () => getShopsCollection,
-  getThemesCollection: () => getThemesCollection
+  getThemesCollection: () => getThemesCollection,
+  getTiktokAdsCollection: () => getTiktokAdsCollection,
+  getTiktokAdsConfigCollection: () => getTiktokAdsConfigCollection
 });
 module.exports = __toCommonJS(collections_exports);
 var import_mongodb_collections = require("./mongodb-collections");
 var import_configuration = __toESM(require("@src/configuration"));
 var import_conf = require("@src/mongodb/conf");
+function getTiktokAdsConfigCollection() {
+  return import_conf.client.db(import_configuration.default.mongodb.db).collection(import_mongodb_collections.TIKTOK_ADS_CONFIG_COLLECTION);
+}
+function getTiktokAdsCollection() {
+  return import_conf.client.db(import_configuration.default.mongodb.db).collection(import_mongodb_collections.TIKTOK_ADS_COLLECTION);
+}
 function getAppsCollection() {
   return import_conf.client.db(import_configuration.default.mongodb.db).collection(import_mongodb_collections.APPS_COLLECTION);
 }
@@ -58,6 +66,8 @@ function getShopProductSalesCollection() {
   getShopProductSalesCollection,
   getShopProductsCollection,
   getShopsCollection,
-  getThemesCollection
+  getThemesCollection,
+  getTiktokAdsCollection,
+  getTiktokAdsConfigCollection
 });
 //# sourceMappingURL=collections.js.map

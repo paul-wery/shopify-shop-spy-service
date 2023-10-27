@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/types/google-account.ts"],
+  "sourcesContent": ["export type GOOGLE_ACCOUNT = { email: string; password: string };\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;",
+  "names": []
+}

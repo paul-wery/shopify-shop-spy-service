@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/tools/estimate.ts"],
+  "sourcesContent": ["const LIKES_VIEWS_RATIO = 100; // 1 like = 100 views\nconst AVERAGE_CPM = 10; // $10 per 1000 impressions\n\nexport function estimateViews(likes: number) {\n  return likes * LIKES_VIEWS_RATIO;\n}\n\nexport function estimateBudget(likes: number) {\n  return (estimateViews(likes) / 1000) * AVERAGE_CPM;\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,MAAM,oBAAoB;AAC1B,MAAM,cAAc;AAEb,SAAS,cAAc,OAAe;AAC3C,SAAO,QAAQ;AACjB;AAEO,SAAS,eAAe,OAAe;AAC5C,SAAQ,cAAc,KAAK,IAAI,MAAQ;AACzC;",
+  "names": []
+}

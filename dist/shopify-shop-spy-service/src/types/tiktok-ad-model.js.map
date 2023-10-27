@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/types/tiktok-ad-model.ts"],
+  "sourcesContent": ["enum Budget {\n  LOW = 0,\n  MEDIUM = 1,\n  HIGH = 2,\n}\n\nexport interface TiktokAdModel {\n  id: string;\n  adId: string;\n  likes: number;\n  ctr: number; // in percent\n  budgetEnum: Budget;\n\n  title: string;\n  brandName: string;\n  industryKey: string;\n  industryGroupCode: string;\n  language: string;\n  objectiveKey: string;\n  videoInfo: {\n    id: string;\n    cover: string;\n    urls: Record<string, string>;\n    width: number;\n    height: number;\n    duration: number;\n  };\n\n  comments: number;\n  shares: number;\n  landingPageUrl: string;\n\n  views: number;\n  budget: number;\n  videoUploaded?: boolean;\n  createdAt: number;\n  updatedAt: number;\n}\n"],
+  "mappings": ";;;;;;;;;;;;;AAAA;AAAA;AAAA,IAAK,SAAL,kBAAKA,YAAL;AACE,EAAAA,gBAAA,SAAM,KAAN;AACA,EAAAA,gBAAA,YAAS,KAAT;AACA,EAAAA,gBAAA,UAAO,KAAP;AAHG,SAAAA;AAAA,GAAA;",
+  "names": ["Budget"]
+}

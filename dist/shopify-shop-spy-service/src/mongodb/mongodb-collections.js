@@ -25,6 +25,8 @@ __export(mongodb_collections_exports, {
   SHOP_PRODUCT_SALES: () => SHOP_PRODUCT_SALES,
   SUBSCRIBED_SHOPS_COLLECTION: () => SUBSCRIBED_SHOPS_COLLECTION,
   THEMES_COLLECTION: () => THEMES_COLLECTION,
+  TIKTOK_ADS_COLLECTION: () => TIKTOK_ADS_COLLECTION,
+  TIKTOK_ADS_CONFIG_COLLECTION: () => TIKTOK_ADS_CONFIG_COLLECTION,
   USERS_COLLECTION: () => USERS_COLLECTION
 });
 module.exports = __toCommonJS(mongodb_collections_exports);
@@ -37,6 +39,8 @@ const SHOP_PRODUCT_SALES = `sales`;
 const SUBSCRIBED_SHOPS_COLLECTION = `subscribed-shops`;
 const THEMES_COLLECTION = `themes`;
 const APPS_COLLECTION = `apps`;
+const TIKTOK_ADS_COLLECTION = `tiktok-ads`;
+const TIKTOK_ADS_CONFIG_COLLECTION = `tiktok-ads-config`;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   APPS_COLLECTION,
@@ -47,6 +51,8 @@ const APPS_COLLECTION = `apps`;
   SHOP_PRODUCT_SALES,
   SUBSCRIBED_SHOPS_COLLECTION,
   THEMES_COLLECTION,
+  TIKTOK_ADS_COLLECTION,
+  TIKTOK_ADS_CONFIG_COLLECTION,
   USERS_COLLECTION
 });
 //# sourceMappingURL=mongodb-collections.js.map

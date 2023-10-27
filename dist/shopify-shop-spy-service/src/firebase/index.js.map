@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/firebase/index.ts"],
+  "sourcesContent": ["import { initializeApp, cert } from 'firebase-admin/app';\n\nconst projectId = process.env.FIREBASE_PROJECT_ID;\nconst clientEmail = process.env.FIREBASE_CLIENT_EMAIL;\nconst privateKey = process.env.FIREBASE_PRIVATE_KEY.replace(/\\\\n/g, '\\n');\nconst storageBucket = process.env.FIREBASE_STORAGE_BUCKET;\n\ninitializeApp({\n  credential: cert({\n    projectId,\n    clientEmail,\n    privateKey,\n  }),\n  projectId,\n  storageBucket,\n});\n"],
+  "mappings": "AAAA,iBAAoC;AAEpC,MAAM,YAAY,QAAQ,IAAI;AAC9B,MAAM,cAAc,QAAQ,IAAI;AAChC,MAAM,aAAa,QAAQ,IAAI,qBAAqB,QAAQ,QAAQ,IAAI;AACxE,MAAM,gBAAgB,QAAQ,IAAI;AAAA,IAElC,0BAAc;AAAA,EACZ,gBAAY,iBAAK;AAAA,IACf;AAAA,IACA;AAAA,IACA;AAAA,EACF,CAAC;AAAA,EACD;AAAA,EACA;AACF,CAAC;",
+  "names": []
+}

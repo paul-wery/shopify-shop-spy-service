@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/tiktok-ads/tiktok-ads-config.ts"],
+  "sourcesContent": ["import { getTiktokAdsConfigCollection } from '@src/mongodb/collections';\nimport { TiktokAdsConfigModel } from '@src/types/tiktok-ads-config-model';\nimport { WithId } from 'mongodb';\n\nexport function getTiktokAdsConfig(): Promise<WithId<TiktokAdsConfigModel>> {\n  const collection = getTiktokAdsConfigCollection();\n\n  return collection.findOne({});\n}\n\nexport async function updateTiktokAdsConfig(\n  config: Partial<TiktokAdsConfigModel>\n) {\n  const collection = getTiktokAdsConfigCollection();\n  const current = await getTiktokAdsConfig();\n\n  await collection.updateOne(\n    current?._id ? { _id: current._id } : {},\n    { $set: config },\n    { upsert: true }\n  );\n}\n\nupdateTiktokAdsConfig({\n  countries: ['ES', 'US', 'FR', 'IT', 'PT'],\n  languages: ['es', 'en', 'fr', 'it', 'pt'],\n  industryCodes: ['30', '25', '20'],\n});\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,yBAA6C;AAItC,SAAS,qBAA4D;AAC1E,QAAM,iBAAa,iDAA6B;AAEhD,SAAO,WAAW,QAAQ,CAAC,CAAC;AAC9B;AAEA,eAAsB,sBACpB,QACA;AACA,QAAM,iBAAa,iDAA6B;AAChD,QAAM,UAAU,MAAM,mBAAmB;AAEzC,QAAM,WAAW;AAAA,IACf,SAAS,MAAM,EAAE,KAAK,QAAQ,IAAI,IAAI,CAAC;AAAA,IACvC,EAAE,MAAM,OAAO;AAAA,IACf,EAAE,QAAQ,KAAK;AAAA,EACjB;AACF;AAEA,sBAAsB;AAAA,EACpB,WAAW,CAAC,MAAM,MAAM,MAAM,MAAM,IAAI;AAAA,EACxC,WAAW,CAAC,MAAM,MAAM,MAAM,MAAM,IAAI;AAAA,EACxC,eAAe,CAAC,MAAM,MAAM,IAAI;AAClC,CAAC;",
+  "names": []
+}

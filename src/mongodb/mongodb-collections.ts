@@ -15,3 +15,5 @@ export const SHOP_PRODUCT_SALES = `sales`;
 export const SUBSCRIBED_SHOPS_COLLECTION = `subscribed-shops`;
 export const THEMES_COLLECTION = `themes`;
 export const APPS_COLLECTION = `apps`;
+export const TIKTOK_ADS_COLLECTION = `tiktok-ads`;
+export const TIKTOK_ADS_CONFIG_COLLECTION = `tiktok-ads-config`;

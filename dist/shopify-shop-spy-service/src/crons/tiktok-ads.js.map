@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/crons/tiktok-ads.ts"],
+  "sourcesContent": ["import { startCollectAds } from '@src/tiktok-ads/startCollectAds';\nimport { stopDynos } from '../heroku';\nimport { NO_ACCOUNTS_ERROR } from '@src/constants/index';\nimport { startCollectAdsDetails } from '@src/tiktok-ads/startCollectAdsDetails';\nimport { deleteCorruptedVideos } from '@src/tiktok-ads/deleteCorruptedVideos';\n\nexport const startSpyTiktokAds = async () => {\n  let success = false;\n\n  for (let index = 0; index < 3 && !success; index++) {\n    try {\n      success = await startCollectAds();\n    } catch (error) {\n      console.error(error);\n      if (error.message === NO_ACCOUNTS_ERROR) break;\n    }\n  }\n  try {\n    await startCollectAdsDetails();\n  } catch (error) {\n    console.error(error);\n  }\n  try {\n    await deleteCorruptedVideos();\n  } catch (error) {\n    console.error(error);\n  }\n  await stopDynos();\n  console.info('Done');\n};\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,6BAAgC;AAChC,oBAA0B;AAC1B,uBAAkC;AAClC,oCAAuC;AACvC,mCAAsC;AAE/B,MAAM,oBAAoB,YAAY;AAC3C,MAAI,UAAU;AAEd,WAAS,QAAQ,GAAG,QAAQ,KAAK,CAAC,SAAS,SAAS;AAClD,QAAI;AACF,gBAAU,UAAM,wCAAgB;AAAA,IAClC,SAAS,OAAP;AACA,cAAQ,MAAM,KAAK;AACnB,UAAI,MAAM,YAAY;AAAmB;AAAA,IAC3C;AAAA,EACF;AACA,MAAI;AACF,cAAM,sDAAuB;AAAA,EAC/B,SAAS,OAAP;AACA,YAAQ,MAAM,KAAK;AAAA,EACrB;AACA,MAAI;AACF,cAAM,oDAAsB;AAAA,EAC9B,SAAS,OAAP;AACA,YAAQ,MAAM,KAAK;AAAA,EACrB;AACA,YAAM,yBAAU;AAChB,UAAQ,KAAK,MAAM;AACrB;",
+  "names": []
+}

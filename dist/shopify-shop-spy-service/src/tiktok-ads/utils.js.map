@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/tiktok-ads/utils.ts"],
+  "sourcesContent": ["import { TIKTOK_ACCOUNTS_POOL } from '@src/constants/index';\n\nexport function getRandomAccount(array: typeof TIKTOK_ACCOUNTS_POOL) {\n  return array[Math.floor(Math.random() * array.length)];\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAEO,SAAS,iBAAiB,OAAoC;AACnE,SAAO,MAAM,KAAK,MAAM,KAAK,OAAO,IAAI,MAAM,MAAM,CAAC;AACvD;",
+  "names": []
+}

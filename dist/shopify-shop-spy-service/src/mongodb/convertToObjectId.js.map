@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/mongodb/convertToObjectId.ts"],
+  "sourcesContent": ["import { ObjectId } from 'mongodb';\n\nconst MONGODB_ID_LENGTH = 24;\n\nexport function convertToObjectId(id: string) {\n  return new ObjectId(id.padStart(MONGODB_ID_LENGTH, '0'));\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,qBAAyB;AAEzB,MAAM,oBAAoB;AAEnB,SAAS,kBAAkB,IAAY;AAC5C,SAAO,IAAI,wBAAS,GAAG,SAAS,mBAAmB,GAAG,CAAC;AACzD;",
+  "names": []
+}

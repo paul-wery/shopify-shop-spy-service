@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/tiktok-ads/config.ts"],
+  "sourcesContent": ["import { LaunchOptions } from 'playwright-chromium';\n\nconst { PROXY_HOST, PROXY_PORT, PROXY_USERNAME, PROXY_PASSWORD } = process.env;\n\nexport const PLAYWRIGHT_CONFIG: LaunchOptions = {\n  headless: true,\n  chromiumSandbox: false,\n  args: ['--disable-blink-features=AutomationControlled', '--no-sandbox'],\n  proxy: {\n    server: `${PROXY_HOST}:${PROXY_PORT}`,\n    username: PROXY_USERNAME,\n    password: PROXY_PASSWORD,\n  },\n};\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAEA,MAAM,EAAE,YAAY,YAAY,gBAAgB,eAAe,IAAI,QAAQ;AAEpE,MAAM,oBAAmC;AAAA,EAC9C,UAAU;AAAA,EACV,iBAAiB;AAAA,EACjB,MAAM,CAAC,iDAAiD,cAAc;AAAA,EACtE,OAAO;AAAA,IACL,QAAQ,GAAG,cAAc;AAAA,IACzB,UAAU;AAAA,IACV,UAAU;AAAA,EACZ;AACF;",
+  "names": []
+}

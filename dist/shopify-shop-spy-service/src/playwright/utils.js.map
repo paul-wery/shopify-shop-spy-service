@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../src/playwright/utils.ts"],
+  "sourcesContent": ["import { Page } from 'playwright-chromium';\n\nexport function waitForPageChange(page: Page): Promise<void> {\n  const currentUrl = page.url();\n\n  return new Promise((resolve) => {\n    const interval = setInterval(() => {\n      if (page.url() !== currentUrl) {\n        clearInterval(interval);\n        resolve();\n      }\n    }, 100);\n  });\n}\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAEO,SAAS,kBAAkB,MAA2B;AAC3D,QAAM,aAAa,KAAK,IAAI;AAE5B,SAAO,IAAI,QAAQ,CAAC,YAAY;AAC9B,UAAM,WAAW,YAAY,MAAM;AACjC,UAAI,KAAK,IAAI,MAAM,YAAY;AAC7B,sBAAc,QAAQ;AACtB,gBAAQ;AAAA,MACV;AAAA,IACF,GAAG,GAAG;AAAA,EACR,CAAC;AACH;",
+  "names": []
+}
